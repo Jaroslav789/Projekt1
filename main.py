@@ -21,7 +21,7 @@ def create():
 	# vypnutí připojeni
 	connection.close
 
-def insert_data(teacher_name, teacher_age, teacher_address):
+def insert_data():
 	connection = psycopg2.connect(
 		dbname='student',
 		user='postgres',
@@ -30,10 +30,14 @@ def insert_data(teacher_name, teacher_age, teacher_address):
 		port='5432'
 	)
 
+	teacher_name = input('Jméno učitele: ')
+	teacher_age = input('Věk učitele: ')
+	teacher_address = input('Adresa učitele: ')
+
 	cur = connection.cursor()
 	query = '''INSERT INTO teacher(name, age, address)
 						  VALUES (%s, %s, %s)'''
 	cur.execute(query, (teacher_name, teacher_age, teacher_address))
 	connection.commit()
 	connection.close()
-insert_data('Lockhart', 45, 'Bradavice')
+insert_data()

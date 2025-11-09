@@ -52,4 +52,20 @@ entry_address.grid(row=3, column=1)
 button = Button(root, text='Add', command=lambda:insert_data(entry_name.get(), entry_age.get(), entry_address.get()))
 button.grid(row=4, column=1)
 
+# SEARCH SECTION
+# general label
+label_search = Label(root, text='Search data')
+label_search.grid(row=5, column=1)
+
+# ID section
+label_id = Label(root, text='Search by ID: ')
+label_id.grid(row=6, column=0)
+
+entry_id = Entry(root)
+entry_id.grid(row=6, column=1)
+
+# button
+button_search = Button(root, text='Search')
+button_search.grid(row=6, column=2)
+
 root.mainloop()

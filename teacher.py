@@ -3,7 +3,7 @@ import psycopg2
 
 root = Tk()
 root.title('Škola a databáze.')
-root.geometry('300x280')
+root.geometry('340x280')
 root.resizable(False, False) # změna velikosti okna
 
 # FUNCTION
@@ -45,6 +45,26 @@ def display_search(data):
 	listbox = Listbox(root, width=20, height=1)
 	listbox.grid(row=8, column=1)
 	listbox.insert(0, data)
+
+def display_all():
+	connection = psycopg2.connect(
+		dbname='student',
+		user='postgres',
+		password='admin',
+		host='localhost',
+		port='5432'
+	)
+
+	cur = connection.cursor()
+	query = '''SELECT * FROM teacher'''
+	cur.execute(query)
+	all_data = cur.fetchall()
+	listbox = Listbox(root, width=30, height=5)
+	listbox.grid(row=9, column=1)
+	for one_row in all_data:
+		listbox.insert(0, one_row)
+
+display_all()
 
 # LABELS, ENTRIES
 label_general = Label(root, text="Add data")

@@ -3,7 +3,7 @@ import psycopg2
 
 root = Tk()
 root.title('Škola a databáze.')
-root.geometry('340x280')
+root.geometry('300x280')
 root.resizable(False, False) # změna velikosti okna
 
 # FUNCTION
@@ -22,6 +22,7 @@ def insert_data(name, age, address):
 	cur.execute(query, (name, age, address))
 	connection.commit()
 	connection.close()
+	display_all()
 
 
 def search(id):
@@ -59,7 +60,7 @@ def display_all():
 	query = '''SELECT * FROM teacher'''
 	cur.execute(query)
 	all_data = cur.fetchall()
-	listbox = Listbox(root, width=30, height=5)
+	listbox = Listbox(root, width=25, height=5)
 	listbox.grid(row=9, column=1)
 	for one_row in all_data:
 		listbox.insert(0, one_row)

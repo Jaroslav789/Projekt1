@@ -42,7 +42,10 @@ def search(id):
 	query = '''SELECT * FROM teacher WHERE id=%s'''
 	cur.execute(query, (id,)) # čárka, aby to bylo tuple
 	row = cur.fetchone()
-	display_search(row)
+	if row:
+		display_search(row)
+	else:
+		display_search('ID nenalezeno.')
 	connection.commit()
 	connection.close()
 

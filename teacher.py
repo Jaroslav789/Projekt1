@@ -23,6 +23,29 @@ def insert_data(name, age, address):
 	connection.commit()
 	connection.close()
 
+
+def search(id):
+	connection = psycopg2.connect(
+		dbname='student',
+		user='postgres',
+		password='admin',
+		host='localhost',
+		port='5432'
+	)
+
+	cur = connection.cursor()
+	query = '''SELECT * FROM teacher WHERE id=%s'''
+	cur.execute(query, (id))
+	row = cur.fetchone()
+	display_search(row)
+	connection.commit()
+	connection.close()
+
+def display_search(data):
+	listbox = Listbox(root, width=20, height=1)
+	listbox.grid(row=8, column=1)
+	listbox.insert(0, data)
+
 # LABELS, ENTRIES
 label_general = Label(root, text="Add data")
 label_general.grid(row=0, column=1)
@@ -65,7 +88,7 @@ entry_id = Entry(root)
 entry_id.grid(row=6, column=1)
 
 # button
-button_search = Button(root, text='Search')
+button_search = Button(root, text='Search', command=lambda:search(entry_id.get()))
 button_search.grid(row=6, column=2)
 
 root.mainloop()

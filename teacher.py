@@ -69,6 +69,18 @@ def display_all():
 	all_data = cur.fetchall()
 	listbox = Listbox(root, width=25, height=5)
 	listbox.grid(row=9, column=1)
+
+	# Vytvoření Scrollbar widget
+	scrollbar = Scrollbar(root)
+	# Umístění Scrollbar v okně
+	scrollbar.grid(row=9, column=2, sticky='nsw')
+
+	# Připojení Scrollbar k Listbox
+	# scrollbar reaguje na posouvání v listboxu
+	listbox.config(yscrollcommand=scrollbar.set)
+	# listbox reaguje na posouvání scroll barem
+	scrollbar.config(command=listbox.yview)
+
 	for one_row in all_data:
 		listbox.insert(0, one_row)
 
